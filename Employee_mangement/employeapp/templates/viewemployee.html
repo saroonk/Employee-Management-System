@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Employee</title>
+    <link rel="stylesheet" href="{% static 'css/viewemployee.css' %}">
+
+</head>
+
+<body>
+
+    <!-- 
+    <nav class="navbar navbar-dark text-white navbar-expand-sm ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><i class="bi bi-alphabet-uppercase">| Employee Management |</i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/userhome">Home</a>
+              </li>
+              <li>
+                <a class="nav-link active" aria-current="page" href="/userprofile">Profile</a>
+
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              
+            </ul>
+            
+          </div>
+        </div>
+      </nav> -->
+
+    <!-- <nav class="navbar">
+       
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>MyWebsite</span>
+        </div>
+
+       
+        <div class="navbar-links" id="navbarLinks">
+            <a href="/home">Home</a>
+        </div>
+
+     
+        <div class="toggle-btn" onclick="toggleNavbar()">
+            &#9776;
+        </div>
+    </nav> -->
+
+
+
+
+
+    {% if x1 %}
+    {% for i in x1 %}
+    <div class="profile-container">
+        {% if i.profilepic %}
+        <img src="{{ i.profilepic.url }}" alt="" class="profile-image">
+        {% else %}
+        <img src="{% static 'images/user-profile.jpg' %}" alt="" class="profile-image">
+        {% endif %}
+
+        <h2>{{ i.emp_id.first_name }} {{ i.emp_id.last_name }}</h2>
+
+        <div class="profile-details">
+            <p>AGE: {{ i.age }}</p>
+            <p>Email: {{ i.emp_id.email }}</p>
+            <p>Phone: {{ i.phoneno }}</p>
+            <p>Address: {{ i.address }}</p>
+
+            {% if i.emp_id.is_active == 0 %}
+            <button class="btn btn-warning"><a href="{% url 'approverequest' aid=i.id %}"
+                    class="btn btn-success">Approve</a></button>
+            {% elif i.emp_id.is_active == 1 %}
+            <button class="btn-approved" disabled="disabled">Approved</button>
+            <button class="btn btn-warning"><a href="{% url 'disaproveemployee' aid=i.id %}"
+                    class="btn btn-success">Disapprove</a></button>
+            {% else %}
+            <a href="{% url 'approverequest' aid=i.id %}" class="btn btn-success">Approve</a>
+            <button class="btn-dis" disabled="disabled">Disapproved</button>
+            {% endif %}
+
+            <button><a href="{% url 'confirmrequest' did=i.id %}">Delete</a></button>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1>no employees</h1>
+
+    {% endif %}
+
+
+    <!-- 
+<script>
+    function toggleNavbar() {
+        var navbarLinks = document.getElementById("navbarLinks");
+        navbarLinks.classList.toggle("active");
+    }
+</script> -->
+
+
+
+</body>
+
+</html>

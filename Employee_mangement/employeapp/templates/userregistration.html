@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Theme Signup Page</title>
+    <link rel="stylesheet" href="{% static 'css/regis.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body style="background-color:#1e1e1e;">
+
+    <div class="container">
+        <hr style="border-color: #444;">
+        
+        <form action="" method="POST" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+            <div class="action-buttons">
+                <a href="{% url 'logins' %}" class="btn btn-cancel text-white">Cancel</a> 
+                <button type="submit" class="btn btn-done text-white ">Done</button>               
+            </div>
+
+            <div class="profile-photo-upload text-center mb-4">
+                <label for="id_profile_photo" class="custom-file-upload">
+                    <img id="profile-photo-preview" class="profile-photo" src="{% static 'images/user-profile.jpg' %}" alt="Add Profile Photo">
+                    <span>Choose File</span>
+                </label>
+                <input type="file" id="id_profile_photo" name="img" accept="image/*" onchange="previewProfilePhoto(event)">
+                <p class="text-primary">Add Profile Photo</p>
+            </div>
+
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name">
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone No</label>
+                <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="un" required placeholder="Choose a username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="ps" required placeholder="Enter your password">
+            </div>
+        </form>
+
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function previewProfilePhoto(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('profile-photo-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>

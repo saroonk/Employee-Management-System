@@ -1,0 +1,64 @@
+
+body {
+    background-color: #dc0f0f;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.navbar {
+    background-color: #333333; 
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #03a9f4;  
+}
+
+.container-fluid {
+    height: 100vh; 
+}
+
+.welcome-text {
+    font-size: 5rem;  
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    animation: fadeInTop 1.5s ease-out;
+}
+
+h2 {
+    font-size: 2rem;  
+    color: #ffffff;
+    margin-top: 0;
+}
+
+
+@keyframes fadeInTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        font-size: 1.1rem;  
+    }
+
+    .welcome-text {
+        font-size: 4rem;      }
+
+    h2 {
+        font-size: 1.5rem;  
+    }
+}

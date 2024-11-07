@@ -1,0 +1,155 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="input1">PROFILE IMAGE</label>
+        <input type="image" name="pimage" value="{{ view.profile_image }}"><br>
+        <img src="{{ view.profile_image }}" alt=""> 
+        <input type="file" id="profilePic" name="pic"> 
+
+        <label for="input2">FIRST NAME</label>
+        <input type="text" name="fname" value="{{ view.emp_id.first_name }}"><br>
+        <label for="input3">LAST NAME</label>
+        <input type="text" name="lname" value="{{ view.emp_id.last_name }}"><br>
+        <label for="input4">AGE</label>
+        <input type="number" name="age" value="{{ view.age }}"><br>
+        <label for="input5">EMAIL</label>
+        <input type="email" name="email" value="{{ view.emp_id.email }}"><br>
+        <label for="input6">PHONE NO</label>
+        <input type="number" name="phone" value="{{ view.phoneno }}"><br><br>
+        <label for="input6">ADDRESS</label>
+        <input type="text" name="address" value="{{ view.address }}"><br><br>
+
+        <button type="submit">UPDATE</button>
+    </form>
+</body>
+</html> -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="{% static 'css/userupdate.css' %}">
+
+</head>
+<body>
+    <!-- <div class="form-container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="profile-image-section">
+                <label for="profilePic">PROFILE IMAGE</label>
+                {% if view.profile_image %}
+                    <img src="{{ view.profile_image.url }}" alt="Profile Image">
+                {% else %}
+                    <img src="{% static 'images/burger.jpeg' %}" alt="Default Profile Image">
+                {% endif %}
+                <input type="file" id="profilePic" name="pic">
+            </div>
+
+            <label for="input1">FIRST NAME</label>
+            <input type="text" name="fname" value="{{ view.emp_id.first_name }}">
+
+            <label for="input2">LAST NAME</label>
+            <input type="text" name="lname" value="{{ view.emp_id.last_name }}">
+
+            <label for="input3">AGE</label>
+            <input type="number" name="age" value="{{ view.age }}">
+
+            <label for="input4">EMAIL</label>
+            <input type="email" name="email" value="{{ view.emp_id.email }}">
+
+            <label for="input5">PHONE NO</label>
+            <input type="number" name="phone" value="{{ view.phoneno }}">
+
+            <label for="input6">ADDRESS</label>
+            <input type="text" name="address" value="{{ view.address }}">
+
+            <button type="submit">UPDATE</button>
+        </form>
+    </div> -->
+
+
+    <div class="container dark-theme-container">
+        <div class="action-buttons">
+            <button class="btn btn-cancel"><a href="{% url 'userprofile' %}">Cancel</a></button>
+            <h5>Edit Profile</h5>
+            
+        </div>
+        <hr>
+        <form action="" method="POST" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+            <div class="text-center mb-4">
+                {% if view.profile_image %}
+                    <img src="{{ view.profile_image.url }}" alt="Profile Image" class="profile-photo">
+                {% else %}
+                <label for="id_profile_photo" class="custom-file-upload">
+                    <img id="profile-photo-preview" class="profile-photo" src="{% static 'images/user-profile.jpg' %}" alt="Add Profile Photo">
+                    <span>Choose File</span>
+                </label>
+                <input type="file" id="id_profile_photo" name="pic" accept="image/*" onchange="previewProfilePhoto(event)">
+                <p class="text-primary">Add Profile Photo</p>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" value="{{ view.emp_id.first_name }}">
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" value="{{ view.emp_id.last_name }}">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ view.age }}">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ view.emp_id.email }}">
+            </div>
+            <div class="form-group">
+                <label for="Phone">Phone No</label>
+                <input type="number" class="form-control" id="phone" name="phone" value="{{ view.phoneno }}">
+            </div>
+            <div class="form-group">
+                <label for="Address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ view.address }}">
+            </div>
+            <button class="btn btn-done">Done</button>
+        </form>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function previewProfilePhoto(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('profile-photo-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+
+</body>
+</html>
