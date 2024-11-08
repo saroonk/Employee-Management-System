@@ -52,8 +52,7 @@ def user_reg(request):
 @login_required
 def userhome(request):
     # user1=request.session.get('user_id')
-    # userdet=User.objects.get(user_id_id=user1)
-    # user=User.objects.get(id=user1)
+    # userdet=Employee.objects.get(emp_id_id=user1)
     return render(request,'userhome.html')
 
 def userprofile(request):
@@ -75,7 +74,9 @@ def userupdate(request):
         lnme=request.POST.get('lname')
         em=request.POST.get('email')
         ph=request.POST.get('phone')
-        pic=request.POST.get('pic')
+        pic=request.FILES.get('pic')
+        print('//////////////////////////////////////////////////////////////////////',pic)
+        print('//////////////////////////////////////////////////////////////////////zzzzzzzzzzzzzzzzzzzzzzzzz',age)
         use.address=address
         use.age=age
         use.phoneno=ph
